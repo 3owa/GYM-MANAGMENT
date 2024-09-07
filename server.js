@@ -1,13 +1,7 @@
 const express = require('express');
 const app = express();
-
-// Define the port variable before using it
 const port = 3000;
-
-// Middleware to parse JSON bodies
 app.use(express.json());
-
-// Define your routes here
 app.post('/signup', (req, res) => {
   const { name, age } = req.body;
 

@@ -8,25 +8,28 @@
 </head>
 <body>
   <div class="container">
-    <button class="top-button">Add New User</button>
+    <button class="top-button" id="addUserButton">Add New User</button>
 
-    <div class="user-list">
-      <div class="user-card">
-        <h3 class="user-name">John Doe</h3>
-        <p class="user-info">Age: 28</p>
-        <p class="user-info">Last Month Paid: 09/10</p>
-        <button class="paid-button">Paid</button>
-      </div>
-
-      <div class="user-card">
-        <h3 class="user-name">Jane Smith</h3>
-        <p class="user-info">Age: 34</p>
-        <p class="user-info">Last Month Paid: 08/22</p>
-        <button class="paid-button">Paid</button>
-      </div>
-
-      <!-- Add more user cards here -->
+    <div class="user-list" id="userList">
+      <!-- User cards will be dynamically added here -->
     </div>
   </div>
+
+  <!-- Modal for adding a new user -->
+  <div class="modal" id="addUserModal">
+    <div class="modal-content">
+      <span class="close-button" id="closeModal">&times;</span>
+      <h2>Add New User</h2>
+      <form id="addUserForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required min="0">
+        <button type="submit">Add</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="roh.js"></script>
 </body>
 </html>

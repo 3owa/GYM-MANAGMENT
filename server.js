@@ -6,7 +6,7 @@ const { randomUUID } = require('crypto');
 
 // Initialize Express app and port
 const app = express();
-const port = 7112;
+const port = 9000;
 
 // Firebase configuration
 const firebaseConfig = {

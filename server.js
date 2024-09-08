@@ -3,10 +3,17 @@ const { initializeApp } = require('firebase/app');
 const { getDatabase, ref, set, get, update } = require('firebase/database');
 const express = require('express');
 const { randomUUID } = require('crypto');
-
+const cors = require('cors');  // Import cors
 // Initialize Express app and port
 const app = express();
-const port = 9000;
+const port = 9001;
+
+
+// Use CORS middleware
+app.use(cors());
+
+// Middleware to parse JSON bodies
+app.use(express.json());
 
 // Firebase configuration
 const firebaseConfig = {

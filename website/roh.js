@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            const response = await fetch("http://localhost:9001/signup", {
+            const response = await fetch("https://gym-managment-riyu.onrender.com/signup", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to fetch users from the server
     async function fetchUsers() {
       try {
-        const response = await fetch('http://localhost:9001/users'); // Replace with your actual backend URL
+        const response = await fetch('https://gym-managment-riyu.onrender.com/users'); // Replace with your actual backend URL
         if (!response.ok) {
           throw new Error('Failed to fetch users');
         }
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const userId = event.target.getAttribute('data-user-id');
 
     try {
-      const response = await fetch(`http://localhost:9001/users/paid/${userId}`, {
+      const response = await fetch(`https://gym-managment-riyu.onrender.com/users/paid/${userId}`, {
         method: 'POST'
       });
 
@@ -119,7 +119,5 @@ document.addEventListener('DOMContentLoaded', () => {
       alert('Failed to update payment status');
     }
   }
-
-
 
 });

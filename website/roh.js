@@ -39,7 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) {
                 throw new Error(`Error: ${response.status}`);
             }
-            
+
+            fetchUsers();
             addUserModal.style.display = 'none'; // Close the modal
             addUserForm.reset(); // Clear form fields
         } catch (error) {
@@ -47,4 +48,78 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Error adding user: ' + error.message);
         }
     });
+
+
+
+    fetchUsers();
+
+    // Function to fetch users from the server
+    async function fetchUsers() {
+      try {
+        const response = await fetch('http://localhost:9001/users'); // Replace with your actual backend URL
+        if (!response.ok) {
+          throw new Error('Failed to fetch users');
+        }
+  
+        const users = await response.json();
+        displayUsers(users); // Call function to display users
+      } catch (error) {
+        console.error('Error fetching users:', error);
+        alert('Failed to load users');
+      }
+    }
+  
+    // Function to display users in the user list
+    function displayUsers(users) {
+      const userList = document.getElementById('userList');
+      userList.innerHTML = ''; // Clear any existing content
+  
+      // Loop through users and create cards
+        Object.keys(users).forEach(userId => {
+        const user = users[userId];
+  
+        const userCard = document.createElement('div');
+        userCard.classList.add('user-card');
+        userCard.innerHTML = `
+          <h3>${user.name}</h3>
+          <p>Age: ${user.age}</p>
+          <p>Sign-up Date: ${user.signDate}</p>
+          <p>Last Month Paid: ${user.lastMonthPaid || 'N/A'}</p>
+          <button class="paid-button" data-user-id="${userId}">Paid</button>
+        `;
+        userList.appendChild(userCard);
+      });
+
+
+      const paidButtons = document.querySelectorAll('.paid-button');
+            paidButtons.forEach(button => {
+            button.addEventListener('click', handlePaidButtonClick);
+    });
+
+}
+
+
+  // Function to handle the "Paid" button click
+  async function handlePaidButtonClick(event) {
+    const userId = event.target.getAttribute('data-user-id');
+
+    try {
+      const response = await fetch(`http://localhost:9001/users/paid/${userId}`, {
+        method: 'POST'
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update payment status');
+      }
+
+      // Refresh the user list to show the updated payment info
+      fetchUsers();
+    } catch (error) {
+      console.error('Error updating payment status:', error);
+      alert('Failed to update payment status');
+    }
+  }
+
+
+
 });

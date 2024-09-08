@@ -2,6 +2,7 @@
   "dependencies": {
     "express": "^4.19.2",
     "firebase": "^10.13.1",
-    "mysql2": "^3.11.0"
+    "mysql2": "^3.11.0",
+    "uuid": "^10.0.0"
   }
 }
